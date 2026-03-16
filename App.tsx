@@ -196,18 +196,46 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     paddingTop: 8,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 8,
+    marginBottom: 6,
   },
-  appLabel: {
+appLabel: {
     fontSize: 14,
     color: "#71717a",
+    fontFamily: "monospace",
+  },
+  appTitle: {
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#18181b",
+    fontFamily: "monospace",
+  },
+  avatarText: {
+    color: "#ffffff",
+    fontWeight: "600",
+    fontFamily: "monospace",
+  },
+  subTitle: {
+    fontSize: 14,
+    color: "#71717a",
+    marginBottom: 16,
+    fontFamily: "monospace",
+  },
+  chipText: {
+    fontSize: 13,
+    color: "#52525b",
+    fontFamily: "monospace",
+  },
+  chipTextActive: {
+    color: "#ffffff",
+    fontWeight: "600",
+    fontFamily: "monospace",
   },
   appTitle: {
     fontSize: 26,
@@ -235,9 +263,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   chip: {
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 14,
     backgroundColor: "#e4e4e7",
     marginRight: 8,
   },
@@ -255,16 +283,23 @@ const styles = StyleSheet.create({
   listContent: {
     paddingBottom: 24,
   },
-  card: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 18,
-    marginBottom: 16,
+card: {
+    backgroundColor: "#ffffff",
+    borderRadius: 14,
+    marginBottom: 14,
     overflow: "hidden",
     shadowColor: "#000",
     shadowOpacity: 0.06,
-    shadowOffset: { width: 0, height: 6 },
-    shadowRadius: 10,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  cardImage: {
+    width: "100%",
+    height: 150,
+  },
+  cardContent: {
+    padding: 12,
   },
   cardImage: {
     width: "100%",
@@ -283,20 +318,24 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#d97706",
     textTransform: "uppercase",
+    fontFamily: "monospace",
   },
   cardTime: {
     fontSize: 12,
     color: "#a1a1aa",
+    fontFamily: "monospace",
   },
   cardTitle: {
     fontSize: 16,
     fontWeight: "600",
     color: "#18181b",
     marginBottom: 4,
+    fontFamily: "monospace",
   },
   cardDescription: {
     fontSize: 13,
     color: "#71717a",
+    fontFamily: "monospace",
   },
 });
 
