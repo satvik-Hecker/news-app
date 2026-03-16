@@ -1,0 +1,303 @@
+import React, { useMemo, useState, useEffect } from "react";
+import {
+  Animated,
+  FlatList,
+  Image,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+type Category = "All" | "Technology" | "Sports" | "Business" | "World";
+
+type Article = {
+  id: string;
+  title: string;
+  description: string;
+  category: Category;
+  image: string;
+  time: string;
+};
+
+const CATEGORIES: Category[] = ["All", "Technology", "Sports", "Business", "World"];
+
+const MOCK_NEWS: Article[] = [
+  {
+    id: "1",
+    title: "New AI Model Changes the Game",
+    description: "Researchers release a breakthrough model pushing the limits of language understanding.",
+    category: "Technology",
+    image: "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg",
+    time: "2h ago",
+  },
+  {
+    id: "2",
+    title: "Local Team Secures Last-Minute Victory",
+    description: "In a nail‑biting finish, fans witness one of the most dramatic endings this season.",
+    category: "Sports",
+    image: "https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg",
+    time: "30m ago",
+  },
+  {
+    id: "3",
+    title: "Markets Rally After Positive Earnings",
+    description: "Investors respond optimistically as major companies report stronger‑than‑expected profits.",
+    category: "Business",
+    image: "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg",
+    time: "4h ago",
+  },
+  {
+    id: "4",
+    title: "Global Leaders Meet for Climate Summit",
+    description: "Key decisions are expected as countries negotiate aggressive climate targets.",
+    category: "World",
+    image: "https://images.pexels.com/photos/87009/pexels-photo-87009.jpeg",
+    time: "1d ago",
+  },
+  {
+    id: "5",
+    title: "Startups Race to Build the Next Super App",
+    description: "From messaging to payments, companies fight to become the all‑in‑one platform.",
+    category: "Technology",
+    image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg",
+    time: "3h ago",
+  },
+];
+
+type ArticleCardProps = {
+  article: Article;
+  index: number;
+};
+
+const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
+  const translateY = useMemo(() => new Animated.Value(20), []);
+  const opacity = useMemo(() => new Animated.Value(0), []);
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(translateY, {
+        toValue: 0,
+        duration: 350,
+        delay: index * 80,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 350,
+        delay: index * 80,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [index, opacity, translateY]);
+
+  return (
+    <Animated.View
+      style={[
+        styles.card,
+        {
+          transform: [{ translateY }],
+          opacity,
+        },
+      ]}
+    >
+      <Image source={{ uri: article.image }} style={styles.cardImage} />
+      <View style={styles.cardContent}>
+        <View style={styles.cardHeaderRow}>
+          <Text style={styles.cardCategory}>{article.category}</Text>
+          <Text style={styles.cardTime}>{article.time}</Text>
+        </View>
+        <Text style={styles.cardTitle} numberOfLines={2}>
+          {article.title}
+        </Text>
+        <Text style={styles.cardDescription} numberOfLines={3}>
+          {article.description}
+        </Text>
+      </View>
+    </Animated.View>
+  );
+};
+
+const App = () => {
+  const [selectedCategory, setSelectedCategory] = useState<Category>("All");
+
+  const filteredNews = useMemo(() => {
+    if (selectedCategory === "All") return MOCK_NEWS;
+    return MOCK_NEWS.filter((item) => item.category === selectedCategory);
+  }, [selectedCategory]);
+
+  const renderCategoryChip = (category: Category) => {
+    const isActive = category === selectedCategory;
+    return (
+      <TouchableOpacity
+        key={category}
+        activeOpacity={0.8}
+        onPress={() => setSelectedCategory(category)}
+        style={[
+          styles.chip,
+          isActive && styles.chipActive,
+        ]}
+      >
+        <Text style={[styles.chipText, isActive && styles.chipTextActive]}>
+          {category}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderArticle = ({ item, index }: { item: Article; index: number }) => {
+    return <ArticleCard article={item} index={index} />;
+  };
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.appLabel}>Today</Text>
+            <Text style={styles.appTitle}>Daily News</Text>
+          </View>
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>N</Text>
+          </View>
+        </View>
+
+        <Text style={styles.subTitle}>Stay updated with the latest stories.</Text>
+
+        <View style={styles.chipRow}>
+          <FlatList
+            data={CATEGORIES}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => renderCategoryChip(item)}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+
+        <FlatList
+          data={filteredNews}
+          keyExtractor={(item) => item.id}
+          renderItem={renderArticle}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.listContent}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#F4F5F7",
+  },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 8,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  appLabel: {
+    fontSize: 14,
+    color: "#8B8FA4",
+  },
+  appTitle: {
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#111827",
+  },
+  avatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#111827",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  avatarText: {
+    color: "#FFFFFF",
+    fontWeight: "600",
+  },
+  subTitle: {
+    fontSize: 14,
+    color: "#6B7280",
+    marginBottom: 16,
+  },
+  chipRow: {
+    marginBottom: 12,
+  },
+  chip: {
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 16,
+    backgroundColor: "#E5E7EB",
+    marginRight: 8,
+  },
+  chipActive: {
+    backgroundColor: "#111827",
+  },
+  chipText: {
+    fontSize: 13,
+    color: "#4B5563",
+  },
+  chipTextActive: {
+    color: "#F9FAFB",
+    fontWeight: "600",
+  },
+  listContent: {
+    paddingBottom: 24,
+  },
+  card: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    marginBottom: 16,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowOffset: { width: 0, height: 6 },
+    shadowRadius: 10,
+    elevation: 3,
+  },
+  cardImage: {
+    width: "100%",
+    height: 170,
+  },
+  cardContent: {
+    padding: 14,
+  },
+  cardHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 6,
+  },
+  cardCategory: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#2563EB",
+    textTransform: "uppercase",
+  },
+  cardTime: {
+    fontSize: 12,
+    color: "#9CA3AF",
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#111827",
+    marginBottom: 4,
+  },
+  cardDescription: {
+    fontSize: 13,
+    color: "#6B7280",
+  },
+});
+
+export default App;
