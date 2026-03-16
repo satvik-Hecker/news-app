@@ -158,7 +158,7 @@ const App = () => {
         <View style={styles.header}>
           <View>
             <Text style={styles.appLabel}>Today</Text>
-            <Text style={styles.appTitle}>Daily News</Text>
+            <Text style={styles.appTitle}>AmberBrief</Text>
           </View>
           <View style={styles.avatar}>
             <Text style={styles.avatarText}>N</Text>
@@ -192,7 +192,7 @@ const App = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F4F5F7",
+    backgroundColor: "#f4f4f5",
   },
   container: {
     flex: 1,
@@ -207,28 +207,28 @@ const styles = StyleSheet.create({
   },
   appLabel: {
     fontSize: 14,
-    color: "#8B8FA4",
+    color: "#71717a",
   },
   appTitle: {
     fontSize: 26,
     fontWeight: "700",
-    color: "#111827",
+    color: "#18181b",
   },
   avatar: {
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: "#111827",
+    backgroundColor: "#d97706",
     alignItems: "center",
     justifyContent: "center",
   },
   avatarText: {
-    color: "#FFFFFF",
+    color: "#ffffff",
     fontWeight: "600",
   },
   subTitle: {
     fontSize: 14,
-    color: "#6B7280",
+    color: "#71717a",
     marginBottom: 16,
   },
   chipRow: {
@@ -238,18 +238,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 16,
-    backgroundColor: "#E5E7EB",
+    backgroundColor: "#e4e4e7",
     marginRight: 8,
   },
   chipActive: {
-    backgroundColor: "#111827",
+    backgroundColor: "#d97706",
   },
   chipText: {
     fontSize: 13,
-    color: "#4B5563",
+    color: "#52525b",
   },
   chipTextActive: {
-    color: "#F9FAFB",
+    color: "#ffffff",
     fontWeight: "600",
   },
   listContent: {
@@ -281,22 +281,22 @@ const styles = StyleSheet.create({
   cardCategory: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#2563EB",
+    color: "#d97706",
     textTransform: "uppercase",
   },
   cardTime: {
     fontSize: 12,
-    color: "#9CA3AF",
+    color: "#a1a1aa",
   },
   cardTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#111827",
+    color: "#18181b",
     marginBottom: 4,
   },
   cardDescription: {
     fontSize: 13,
-    color: "#6B7280",
+    color: "#71717a",
   },
 });
 
