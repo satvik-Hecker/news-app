@@ -226,16 +226,19 @@ appLabel: {
     color: "#71717a",
     marginBottom: 16,
     fontFamily: "monospace",
+    letterSpacing: 0.3,
   },
   chipText: {
     fontSize: 13,
     color: "#52525b",
     fontFamily: "monospace",
+    letterSpacing: 0.5,
   },
   chipTextActive: {
     color: "#ffffff",
     fontWeight: "600",
     fontFamily: "monospace",
+    letterSpacing: 0.5,
   },
   appTitle: {
     fontSize: 26,
@@ -280,10 +283,10 @@ appLabel: {
     color: "#ffffff",
     fontWeight: "600",
   },
-  listContent: {
+listContent: {
     paddingBottom: 24,
   },
-card: {
+  card: {
     backgroundColor: "#ffffff",
     borderRadius: 14,
     marginBottom: 14,
@@ -301,41 +304,38 @@ card: {
   cardContent: {
     padding: 12,
   },
-  cardImage: {
-    width: "100%",
-    height: 170,
-  },
-  cardContent: {
-    padding: 14,
-  },
   cardHeaderRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 6,
   },
   cardCategory: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: "600",
     color: "#d97706",
     textTransform: "uppercase",
     fontFamily: "monospace",
+    letterSpacing: 1,
   },
   cardTime: {
-    fontSize: 12,
+    fontSize: 11,
     color: "#a1a1aa",
     fontFamily: "monospace",
+    letterSpacing: 0.5,
   },
   cardTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "600",
     color: "#18181b",
     marginBottom: 4,
     fontFamily: "monospace",
+    lineHeight: 20,
   },
   cardDescription: {
-    fontSize: 13,
+    fontSize: 12,
     color: "#71717a",
     fontFamily: "monospace",
+    lineHeight: 18,
   },
 });
 
